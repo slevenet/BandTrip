@@ -1,0 +1,32 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://band_trip:band_trip@slevenets.4o8vz.mongodb.net/band_trip
+      auto-index-creation: true
+    web:
+      pageable:
+        max-page-size: 100
+  main:
+    banner-mode: off
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+      write-dates-as-timestamps: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_ENUMS: true
+
+
+management:
+  trace:
+    http:
+      include: principal,request-headers,response-headers,cookie-headers
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: "*"

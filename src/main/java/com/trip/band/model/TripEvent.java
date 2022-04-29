@@ -1,12 +1,12 @@
 package com.trip.band.model;
 
+import com.trip.band.model.enums.TripEventType;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Document
@@ -17,7 +17,7 @@ public class TripEvent {
     private TripEventType eventType;
     private String name;
     private String description;
-    private EventStatus status;
+    //   private EventStatus status;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Integer maxParticipants;

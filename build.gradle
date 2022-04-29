@@ -18,12 +18,41 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set("mapstructVersion", "1.4.2.Final")
+    set("testcontainersVersion", "1.16.0")
+    set("mongockVersion", "5.0.32")
+    set("playtikaVersion", "2.0.19")
+    set("springdocsVersion", "1.6.4")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        mavenBom "io.mongock:mongock-bom:${mongockVersion}"
+        mavenBom "com.playtika.testcontainers:testcontainers-spring-boot-bom:${playtikaVersion}"
+    }
+}
+
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'io.mongock:mongock-springboot'
+    implementation 'io.mongock:mongodb-springdata-v3-driver'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.0.1'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation "org.springdoc:springdoc-openapi-ui:${springdocsVersion}"
+    implementation "org.springdoc:springdoc-openapi-data-rest:${springdocsVersion}"
 }
 
 tasks.named('test') {
