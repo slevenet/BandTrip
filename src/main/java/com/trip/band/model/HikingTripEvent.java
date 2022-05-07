@@ -2,11 +2,11 @@ package com.trip.band.model;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.LinkedList;
 
 @Data
 public class HikingTripEvent extends TripEvent {
 
     private int tripDuration;
-    private List<Route> routes;
+    private LinkedList<Point> routes;
 }

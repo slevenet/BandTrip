@@ -1,33 +1,30 @@
 package com.trip.band.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.maps.DirectionsApi;
-import com.google.maps.GeoApiContext;
-import com.google.maps.errors.ApiException;
-import com.google.maps.model.Bounds;
-import com.google.maps.model.DirectionsResult;
-import com.trip.band.repository.TripEventRepository;
+import com.trip.band.model.HikingTripEvent;
+import com.trip.band.model.TripEvent;
+import com.trip.band.service.TripEventService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("api/trips/events")
 public class EventTripController {
 
-    private final TripEventRepository tripEventRepository;
-    private final GeoApiContext context;
+    private final TripEventService service;
 
     @GetMapping
-    public Bounds createNewEvent() throws IOException, InterruptedException, ApiException {
-        DirectionsResult result =
-                DirectionsApi.getDirections(context, "Sydney, AU", "Melbourne, AU").await();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        return result.routes[0].bounds;
+    //api/trips/events/test2
+    public List<TripEvent> createNewEvent() {
+        return service.findAllTripEvents();
+    }
+
+
+    @PostMapping
+    public void createEvent(@RequestBody HikingTripEvent trip) {
+        service.createEvent(trip);
     }
 }
