@@ -8,6 +8,9 @@ class BandTripApplicationTests {
 
     @Test
     void contextLoads() {
+
+
+
     }
 
 }
